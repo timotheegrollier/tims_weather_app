@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block title %}Hello MainController!
+{% endblock %}
+
+{% block body %}
+<pre>
+</pre>
+	<div>
+		<div class="container d-flex flex-column justify-content-center align-items-center mt-5 bg-primary rounded">
+			<h2 class="text-white">{{data.location.name}}</h2>
+			<img src="{{data.current.condition.icon}}" alt="">
+			<h3 class="text-secondary">{{data.current.temp_c}}°</h3>
+		</div>
+	</div>
+{% endblock %}

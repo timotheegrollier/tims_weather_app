@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TimsWeatherApp
+{% endblock %}
+
+
+{% block body %}
+
+
+	<div>
+		<h1 class="text-center mt-5">TimsWeatherApp</h1>
+		<div class="container">
+			{{form_start(form)}}
+			{{form_widget(form)}}
+			{% for param in app.request.query  %}
+				<p class="text-danger text-center">{{param}}</p>
+			{% endfor %}
+			<div class="d-flex justify-content-center mt-5">
+				<button class="btn btn-primary" type="submit">Search</button>
+			</div>
+			{{form_end(form)}}
+
+		</div>
+	</div>
+{% endblock %}
