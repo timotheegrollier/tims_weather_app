@@ -1,0 +1,12 @@
+form{
+    position: relative;
+}
+    .search-results{
+        display: none;
+        position: absolute;
+        top: 94px;
+        left: 50%;
+        transform:translateX(-50%);
+        border-radius: 0px 0px 10px 10px;
+}
+

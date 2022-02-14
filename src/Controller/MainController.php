@@ -26,7 +26,7 @@ class MainController extends AbstractController
     {
 
         $form = $this->createFormBuilder([], ['attr' => ['novalidate' => 'novalidate']])
-            ->add('city', TextType::class,['constraints'=>[new NotBlank(['message'=>'Veuillez rentrez un nom de ville !'])]])
+            ->add('city', TextType::class,['attr'=>["class"=>"typeahead",'autocomplete'=>'off'],'constraints'=>[new NotBlank(['message'=>'Veuillez rentrez un nom de ville !'])]])
             ->getForm();
         $form->handleRequest($request);
 
@@ -51,7 +51,7 @@ class MainController extends AbstractController
         // $city = $request->attributes->get('city');
 
         // dd($city);
-        $url = 'https://api.weatherapi.com/v1/current.json?key=109eb4c71a9e4298a01160154220602&q=' . $city . '&aqi=no';
+        $url = 'https://api.weatherapi.com/v1/current.json?key=109eb4c71a9e4298a01160154220602&q=' . $city . '&lang=fr';
 
         $response = $this->client->request(
             'GET',
@@ -64,6 +64,32 @@ class MainController extends AbstractController
 
         $data = $response->toArray();
         // dd($data);
+
+        return $this->render('main/results.html.twig',compact('data'));
+    }
+
+
+
+    #[Route('/api/autocomplete', name: 'app_auto')]
+    public function autocomplete(Request $request)
+    {
+
+        $city = $request->request->get('city');
+
+        dd($city);
+        $url = 'https://api.weatherapi.com/v1/search.json?key=109eb4c71a9e4298a01160154220602&q=' . $city;
+
+        $response = $this->client->request(
+            'GET',
+            $url
+        );
+
+        // if($response->getStatusCode() === 400){
+        //     return $this->redirectToRoute('app_home',['error'=>'Ville non trouvée !']);
+        // }
+
+        $data = $response->toArray();
+        dd($data);
 
         return $this->render('main/results.html.twig',compact('data'));
     }

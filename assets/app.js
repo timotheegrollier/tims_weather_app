@@ -9,7 +9,18 @@
 import './styles/app.scss';
 
 
+  // require jQuery normally
+  const $ = require('jquery');
+
+ // create global $ and jQuery variables
+ global.$ = global.jQuery = $;
+
 import { Tooltip, Toast, Popover } from 'bootstrap';
 
 // start the Stimulus application
 import './bootstrap';
+
+
+
+
+import './search';
