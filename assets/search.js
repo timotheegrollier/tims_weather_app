@@ -26,6 +26,10 @@ $(document).ready(() => {
                     }
                 })
                 
+                // for(let i = 1; i < matches.length; i++){
+                //     console.log(i);
+                // }
+                
                 matches.map((city) => {
                         $('#autores').append(`<a href="#" class="suggestsLinks">${city}</a><br/>`)
                 })
