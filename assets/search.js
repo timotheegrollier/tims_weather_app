@@ -17,21 +17,16 @@ $(document).ready(() => {
 
 
         let matches = []
-        const displaying = () => {
-            axios.get('http://api.weatherapi.com/v1/search.json?key=109eb4c71a9e4298a01160154220602&q=' + cityInput.val()).then(async(res) => {
-                matches = await []
+        const displaying = async () => {
+            axios.get('http://api.weatherapi.com/v1/search.json?key=109eb4c71a9e4298a01160154220602&q=' + cityInput.val()).then((res) => {
                 res.data.map((city) => {
                     if (matches.indexOf(city.name) === -1 && matches.length <= 6) {
-                        matches.push(city.name)
+                       matches.push(city.name)
                     }
                 })
                 
-                // for(let i = 1; i < matches.length; i++){
-                //     console.log(i);
-                // }
-                
                 matches.map((city) => {
-                        $('#autores').append(`<a href="#" class="suggestsLinks">${city}</a><br/>`)
+                       return $('#autores').append(`<a href="#" class="suggestsLinks">${city}</a><br/>`)
                 })
                 $(".search-results").css('display', 'block')
                 displayed = !displayed
@@ -41,9 +36,11 @@ $(document).ready(() => {
 
         $(cityInput).on('keyup', () => {
             if (cityInput.val().length >= 4) {
+                $('#autores').html('')
+                displaying()
                 if (!displayed) {
                     $('#autores').html('')
-                    displaying()
+                    matches = []
                     setTimeout(() => {
                         let suggestsLinks = document.querySelectorAll('.suggestsLinks')
                         suggestsLinks.forEach((el) => {
@@ -57,7 +54,6 @@ $(document).ready(() => {
                             })
                         })
                     }, 500)
-                    matches = []
                 }
             }
             else {
